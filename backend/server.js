@@ -10,23 +10,23 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to the MongoDB database
-mongoose.connect( process.env.REACT_APP_MONGO_URI , {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-  
+mongoose.connect(process.env.REACT_APP_MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 const db = mongoose.connection;
 
 // Log any errors that occur when connecting to the database
 db.on('error', console.error.bind(console, 'connection error:'));
 
 // Open the connection
-db.once('open', function() {
+db.once('open', function () {
   console.log('Connected to MongoDB!');
 });
 
 
-app.get('/', (req, res) => res.send('Server is running!'));
+app.get('/', (req, res) => res.status(200).json("Welcome, you app is working well"));
 app.use('/uploads', express.static('uploads'));
 
 app.use('/api/photos', photoRoutes);
