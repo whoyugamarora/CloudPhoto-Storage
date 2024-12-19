@@ -25,7 +25,7 @@ const Photoupload = ({ onPhotoUpload }) => {
             const formData = new FormData();
             formData.append('photo', file);
 
-            const response = await axios.post(`${[process.env.REACT_APP_BACKEND_API]}/api/photos`, formData); // Replace with your backend URL
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_API}/api/photos`, formData); // Replace with your backend URL
             console.log('Photo uploaded successfully:', response.data);
 
             // Notify parent component about the new photo
