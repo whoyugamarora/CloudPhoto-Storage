@@ -7,7 +7,19 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: (origin, callback) => {
+      const allowedOrigins = ['https://cloud-photo-storage.vercel.app','https://cloudphoto-storage.pages.dev', 'http://localhost:3000', 'http://localhost:5000', 'http://100.114.44.75:3000'];
+      if (allowedOrigins.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  }
+};
+
+app.use(cors(corsOptions));
 
 // Connect to the MongoDB database
 mongoose.connect(process.env.REACT_APP_MONGO_URI, {

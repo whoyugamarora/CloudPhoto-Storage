@@ -25,7 +25,7 @@ const Photoupload = ({ onPhotoUpload }) => {
             const formData = new FormData();
             formData.append('photo', file);
 
-            const response = await axios.post('http://localhost:5000/api/photos', formData); // Replace with your backend URL
+            const response = await axios.post(`${[process.env.REACT_APP_BACKEND_API]}/api/photos`, formData); // Replace with your backend URL
             console.log('Photo uploaded successfully:', response.data);
 
             // Notify parent component about the new photo
@@ -47,11 +47,21 @@ const Photoupload = ({ onPhotoUpload }) => {
             <input
                 type="file"
                 onChange={handleFileChange}
-                className="mb-2 p-2 border rounded-md w-full"
+                className="mb-2 p-2 border rounded-md w-full mx-auto"
             />
+            {preview && (
+                <div className="mb-4">
+                    <h3 className="text-sm text-gray-600 mb-2">Preview:</h3>
+                    <img
+                        src={preview}
+                        alt="Selected file preview"
+                        className="w-1/3 h-auto rounded-md shadow-md mx-auto"
+                    />
+                </div>
+            )}
             <button
                 onClick={uploadPhoto}
-                className="bg-indigo-600 text-white mx-4 py-2 px-4 rounded-md hover:bg-indigo-700"
+                className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
             >
                 Upload
             </button>

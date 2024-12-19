@@ -53,6 +53,14 @@ const PhotoGallery = ({ photos }) => {
             <p className="mt-2 text-center text-gray-700">
               {selectedPhoto.name || 'Untitled'}
             </p>
+            {/* Download Button */}
+            <a
+              href={selectedPhoto.url}
+              download={selectedPhoto.name || 'photo'}
+              className="block mt-4 bg-indigo-600 text-white py-2 px-4 text-center rounded-md hover:bg-indigo-700"
+            >
+              Download
+            </a>
           </div>
         </div>
       )}
