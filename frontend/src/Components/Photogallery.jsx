@@ -11,12 +11,15 @@ const PhotoGallery = ({ photos }) => {
     setSelectedPhoto(null);
   };
 
+  // Ensure `photos` is always an array
+  const validPhotos = Array.isArray(photos) ? photos : [];
+
   return (
     <div>
       {/* Photo Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {photos.length > 0 ? (
-          photos.map((photo, index) => (
+        {validPhotos.length > 0 ? (
+          validPhotos.map((photo, index) => (
             <div
               key={index}
               className="rounded-md shadow-md overflow-hidden cursor-pointer"

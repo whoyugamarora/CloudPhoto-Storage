@@ -31,7 +31,7 @@ router.post('/', upload.single('photo'), async (req, res) => {
   try {
     const photo = new Photo({
       name: req.file.originalname,
-      url: `http://localhost:${process.env.PORT || 5000}/${req.file.path}`,
+      url: `${process.env.REACT_APP_BACKEND_API}/${req.file.path}`,
     });
     const savedPhoto = await photo.save();
     res.status(201).json(savedPhoto);
