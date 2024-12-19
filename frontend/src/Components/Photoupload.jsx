@@ -20,26 +20,30 @@ const Photoupload = ({ onPhotoUpload }) => {
             alert('Please select a file to upload.');
             return;
         }
-
+    
         try {
             const formData = new FormData();
             formData.append('photo', file);
-
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_API}/api/photos`, formData); // Replace with your backend URL
+    
+            const response = await axios.post(
+                `${process.env.REACT_APP_BACKEND_API}/api/photos`,
+                formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+    
             console.log('Photo uploaded successfully:', response.data);
-
-            // Notify parent component about the new photo
+    
             if (onPhotoUpload) {
                 onPhotoUpload(response.data);
             }
-
-            // Reset form after successful upload
+    
             setFile(null);
             setPreview(null);
         } catch (error) {
-            console.error('Error uploading photo:', error);
+            console.error('Error uploading photo:', error.response || error);
+            alert(`Failed to upload photo: ${error.response?.data?.error || error.message}`);
         }
-    };
+    };    
 
     return (
         <div className="p-4 bg-gray-100 rounded-md shadow-md">
